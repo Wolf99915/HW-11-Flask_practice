@@ -1,18 +1,14 @@
 from app import app, db
 from flask import render_template, request, redirect
 from models.models import Employee, Plant
-#
-# @app.route("/employyes")
-# def employees_home():
-#     employees = Employee.query.all()
-#     return render_template("employees-list.html", employees=employees)
 
 @app.route("/save-employee", methods=["POST"])
 def save_employee():
-    name = request.form.get("name")
-    object_id = request.form.get("object_id")
-    type_of_work = request.form.get("type_of_work")
-    employee = Employee(name=name, object_id=object_id, type_of_work=type_of_work)
+    first_name = request.form.get("first_name")
+    last_name = request.form.get("last_name")
+    email = request.form.get("email")
+    plant_id = request.form.get("plant_id")
+    employee = Employee(first_name=first_name, last_name=last_name, email=email, plant_id=plant_id)
     db.session.add(employee)
     db.session.commit()
     return redirect("/")
